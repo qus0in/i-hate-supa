@@ -1,4 +1,6 @@
 package org.example.ihatesupa.model.form;
 
-public record MyForm() {
+import org.springframework.web.multipart.MultipartFile;
+
+public record MyForm(MultipartFile file) {
 }

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form th:action="@{/}" method="post" th:object="${form}" enctype="multipart/form-data">
+        <input type="file" th:field="*{file}"/>
+        <button>등록</button>
+    </form>
+    <section th:if="${filename}">
+        <img th:src="@{/img/{filename}(filename=${filename})}" alt="이미지">
+    </section>
+</body>
+</html>

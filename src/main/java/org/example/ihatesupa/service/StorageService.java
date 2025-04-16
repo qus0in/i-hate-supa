@@ -28,6 +28,22 @@ public class StorageService {
 
     private final HttpClient httpClient = HttpClient.newHttpClient();
 
+    public byte[] downloadFile(String fileName) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(String.format("%s/storage/v1/object/%s/%s", supabaseUrl, bucketName, fileName)))
+                .header("Authorization", "Bearer " + supabaseApiKey)
+                .GET()
+                .build();
+
+        HttpResponse<byte[]> response = httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
+
+        if (response.statusCode() == 200) {
+            return response.body(); // 바이너리 데이터 반환
+        } else {
+            throw new IOException("Supabase download error: " + new String(response.body()));
+        }
+    }
+
     public String uploadFile(MultipartFile multipartFile) throws IOException, InterruptedException {
         String boundary = "Boundary-" + UUID.randomUUID();
 //        String fileName = UUID.randomUUID() + "-" + multipartFile.getOriginalFilename();

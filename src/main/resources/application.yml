@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: i-hate-supa
+  profiles:
+    active: dev
+#supabase:
+#  url:
+#  api-key:
+#  bucket-name:
